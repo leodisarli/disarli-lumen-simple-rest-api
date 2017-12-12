@@ -37,4 +37,10 @@ class CandidateController extends Controller
     	$candidate->delete();
     	return response()->json('Removed successfully.');
 	}
+
+	public function detail(Request $request, $id)
+    {
+    	$candidate  = Candidate::find($id);
+    	return response()->json($candidate);
+	}
 }

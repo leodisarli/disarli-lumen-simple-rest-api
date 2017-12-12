@@ -58,20 +58,6 @@
                                 </tr>
                             </thead>
                             <tbody id="listContent">
-                                <tr>
-                                    <!--td>1</td>
-                                    <td>Leonardo Di Sarli de Carvalho</td>
-                                    <td>38</td>
-                                    <td>2017-12-12 16:25:45</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td-->
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -88,11 +74,18 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Heres the form
+                        <div class="form-group">
+                            <label for="addName">Name</label>
+                            <input type="text" class="form-control" id="addName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="addAge">Age</label>
+                            <input type="number" class="form-control" id="addAge" placeholder="Age" min="1" max="100">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary test">Save</button>
+                        <button type="button" class="btn btn-primary addButton">Save</button>
                     </div>
                 </div>
             </div>
@@ -107,11 +100,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Heres the form
+                        <div class="editLoading text-center">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                        </div>
+                        <div class="editData">
+                            <input type="hidden" id="editId">
+                            <div class="form-group">
+                                <label for="editName">Name</label>
+                                <input type="text" class="form-control" id="editName" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label for="editAge">Age</label>
+                                <input type="number" class="form-control" id="editAge" placeholder="Age" min="1" max="100">
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-primary editButton">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -126,11 +132,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" id="delId">
                         Confirm the removal of candidate
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger delButton">Delete</button>
                     </div>
                 </div>
             </div>
@@ -140,6 +147,8 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
             function loadCandidates() {
+                $('.candidatesList').hide();
+                $('#listContent').html('');
                 $.ajax({
                     type: 'GET',
                     url: '<?php echo url('api/v1/candidate');?>',
@@ -154,13 +163,13 @@
                                 '<td>'+value.id+'</td>'+
                                 '<td>'+value.name+'</td>'+
                                 '<td>'+value.age+'</td>'+
-                                '<td>'+value.created_at+'</td>'+
+                                '<td>'+value.updated_at+'</td>'+
                                 '<td>'+
-                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-id="'+value.id+'">'+
+                                    '<button type="button" class="btn btn-primary editModal" data-toggle="modal" data-target="#editModal" data-id="'+value.id+'">'+
                                         '<i class="fa fa-pencil"></i>'+
                                     '</button>'+
                                     '&nbsp;'+
-                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delModal" data-id="'+value.id+'">'+
+                                    '<button type="button" class="btn btn-primary delModal" data-toggle="modal" data-target="#delModal" data-id="'+value.id+'">'+
                                         '<i class="fa fa-trash"></i>'+
                                     '</button>'+
                                 '</td>'+
@@ -174,7 +183,93 @@
                 });
             }
 
-            $( document ).ready(function() {
+            $(document).on("click", ".editModal", function () {
+                var editId = $(this).data('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '<?php echo url('api/v1/candidate');?>/' + editId,
+                    dataType: 'JSON',
+                    beforeSend: function( xhr ) {
+                        $('.editLoading').show();
+                    }
+                }).done(function (data) {
+                    $('#editId').val(editId);
+                    $('#editName').val(data.name);
+                    $('#editAge').val(data.age);
+                    $('.editLoading').hide();
+                    $('.editData').show();
+                }).fail(function () {
+                    alert('An error ocours');
+                });
+                
+            });
+
+            $(document).on("click", ".delModal", function () {
+                $('#delId').val($(this).data('id'));
+            });
+
+            $(document).on("click", ".addButton", function () {
+                var name = $('#addName').val();
+                var age = $('#addAge').val();
+                if (name == '') {
+                    alert('Please type a name');
+                    return false;
+                }
+                if (age == '') {
+                    alert('Please type an age');
+                    return false;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo url('api/v1/candidate');?>',
+                    dataType: 'JSON',
+                    data: {
+                        'name' : name,
+                        'age' : age,
+                    }
+                }).done(function (data) {
+                    $('#addModal').modal('toggle');
+                    loadCandidates();
+                }).fail(function () {
+                    alert('An error ocours');
+                });
+            });
+
+            $(document).on("click", ".editButton", function () {
+                var id = $('#editId').val();
+                var name = $('#editName').val();
+                var age = $('#editAge').val();
+                $.ajax({
+                    type: 'PUT',
+                    url: '<?php echo url('api/v1/candidate');?>/'+id,
+                    dataType: 'JSON',
+                    data: {
+                        'name' : name,
+                        'age' : age,
+                    }
+                }).done(function (data) {
+                    $('#editModal').modal('toggle');
+                    loadCandidates();
+                }).fail(function () {
+                    alert('An error ocours');
+                });
+            });
+
+            $(document).on("click", ".delButton", function () {
+                var id = $('#delId').val();
+                $.ajax({
+                    type: 'DELETE',
+                    url: '<?php echo url('api/v1/candidate');?>/'+id,
+                    dataType: 'JSON'
+                }).done(function (data) {
+                    $('#delModal').modal('toggle');
+                    loadCandidates();
+                }).fail(function () {
+                    alert('An error ocours');
+                });
+            });
+
+            $(document).ready(function() {
                 loadCandidates()
             });
         </script>

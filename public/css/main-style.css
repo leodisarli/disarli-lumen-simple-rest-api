@@ -71,10 +71,6 @@ a:hover {
   margin: 20px 0;
 }
 
-.loading {
-  display:none;
-}
-
-.candidatesList {
+.loading, .candidatesList, .editLoading, .editData {
   display:none;
 }

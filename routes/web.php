@@ -10,4 +10,5 @@ $router->group(['prefix' => 'api/v1'], function($router)
 	$router->put('candidate/{id}','CandidateController@update');
 	$router->delete('candidate/{id}','CandidateController@delete');
 	$router->get('candidate','CandidateController@list');
+	$router->get('candidate/{id}','CandidateController@detail');
 });
