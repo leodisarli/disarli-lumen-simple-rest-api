@@ -1,4 +1,10 @@
 Simple API REST + Simple Admin
 Version Alpha
 
-Using Lumen, Facades, Eloquent and Bootstrap
+Using Lumen, Facades, Eloquent, Bootstrap and Ajax
+
+To install and test in porject folder run:
+
+composer install
+php artisan migrate
+php -S localhost:8000 -t public
