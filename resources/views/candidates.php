@@ -43,7 +43,10 @@
                     <button type="button" class="btn btn-primary breath" data-toggle="modal" data-target="#addModal">
                         Add Candidate
                     </button>
-                    <div class="table-responsive">
+                    <div class="loading text-center">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    </div>
+                    <div class="table-responsive candidatesList">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -54,9 +57,9 @@
                                     <th>actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="listContent">
                                 <tr>
-                                    <td>1</td>
+                                    <!--td>1</td>
                                     <td>Leonardo Di Sarli de Carvalho</td>
                                     <td>38</td>
                                     <td>2017-12-12 16:25:45</td>
@@ -67,7 +70,7 @@
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delModal">
                                             <i class="fa fa-trash"></i>
                                         </button>
-                                    </td>
+                                    </td-->
                                 </tr>
                             </tbody>
                         </table>
@@ -89,7 +92,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary test">Save</button>
                     </div>
                 </div>
             </div>
@@ -132,8 +135,48 @@
                 </div>
             </div>
         </div>
-        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            function loadCandidates() {
+                $.ajax({
+                    type: 'GET',
+                    url: '<?php echo url('api/v1/candidate');?>',
+                    dataType: 'JSON',
+                    beforeSend: function( xhr ) {
+                        $('.loading').show();
+                    }
+                }).done(function (data) {
+                    $.each( data, function( key, value ) {
+                        $('#listContent').append(
+                            "<tr>"+
+                                '<td>'+value.id+'</td>'+
+                                '<td>'+value.name+'</td>'+
+                                '<td>'+value.age+'</td>'+
+                                '<td>'+value.created_at+'</td>'+
+                                '<td>'+
+                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-id="'+value.id+'">'+
+                                        '<i class="fa fa-pencil"></i>'+
+                                    '</button>'+
+                                    '&nbsp;'+
+                                    '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delModal" data-id="'+value.id+'">'+
+                                        '<i class="fa fa-trash"></i>'+
+                                    '</button>'+
+                                '</td>'+
+                            '</tr>'
+                        );
+                    });
+                    $('.loading').hide();
+                    $('.candidatesList').show();
+                }).fail(function () {
+                    alert('An error ocours');
+                });
+            }
+
+            $( document ).ready(function() {
+                loadCandidates()
+            });
+        </script>
     </body>
 </html>

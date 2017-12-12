@@ -5,17 +5,24 @@ namespace App\Http\Controllers;
 use App\Candidate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
  
 class CandidateController extends Controller
 {
  
-    public function createCandidate(Request $request)
+	public function list()
+    {
+    	$candidates  = Candidate::all();
+    	return response()->json($candidates);
+	}
+
+    public function create(Request $request)
     {
     	$candidate = Candidate::create($request->all());
     	return response()->json($candidate);
 	}
  
-    public function updateCandidate(Request $request, $id)
+    public function update(Request $request, $id)
     {
     	$candidate  = Candidate::find($id);
     	$candidate->name = $request->input('name');
@@ -24,16 +31,10 @@ class CandidateController extends Controller
     	return response()->json($candidate);
 	}  
  
-    public function deleteCandidate($id)
+    public function delete($id)
     {
     	$candidate  = Candidate::find($id);
     	$candidate->delete();
     	return response()->json('Removed successfully.');
-	}
- 
-    public function index()
-    {
-    	$candidates  = Candidate::all();
-    	return response()->json($candidates);
 	}
 }
