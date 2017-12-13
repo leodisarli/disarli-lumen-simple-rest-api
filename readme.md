@@ -3,7 +3,7 @@ Version Alpha
 
 Using Lumen, Facades, Eloquent, Bootstrap and Ajax
 
-To install and test in porject folder run:
+To install and test in project folder run:
 
 composer install
 
