@@ -151,7 +151,7 @@
                 $('#listContent').html('');
                 $.ajax({
                     type: 'GET',
-                    url: '<?php echo url('api/v1/candidate');?>',
+                    url: '<?php echo url('api/v1/candidates');?>',
                     dataType: 'JSON',
                     beforeSend: function( xhr ) {
                         $('.loading').show();
@@ -187,7 +187,7 @@
                 var editId = $(this).data('id');
                 $.ajax({
                     type: 'GET',
-                    url: '<?php echo url('api/v1/candidate');?>/' + editId,
+                    url: '<?php echo url('api/v1/candidates');?>/' + editId,
                     dataType: 'JSON',
                     beforeSend: function( xhr ) {
                         $('.editLoading').show();
@@ -221,7 +221,7 @@
                 }
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo url('api/v1/candidate');?>',
+                    url: '<?php echo url('api/v1/candidates');?>',
                     dataType: 'JSON',
                     data: {
                         'name' : name,
@@ -241,7 +241,7 @@
                 var age = $('#editAge').val();
                 $.ajax({
                     type: 'PUT',
-                    url: '<?php echo url('api/v1/candidate');?>/'+id,
+                    url: '<?php echo url('api/v1/candidates');?>/'+id,
                     dataType: 'JSON',
                     data: {
                         'name' : name,
@@ -259,7 +259,7 @@
                 var id = $('#delId').val();
                 $.ajax({
                     type: 'DELETE',
-                    url: '<?php echo url('api/v1/candidate');?>/'+id,
+                    url: '<?php echo url('api/v1/candidates');?>/'+id,
                     dataType: 'JSON'
                 }).done(function (data) {
                     $('#delModal').modal('toggle');
