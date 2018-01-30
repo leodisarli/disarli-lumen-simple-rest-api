@@ -7,12 +7,14 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/lumen-framework": "5.5.*",
-        "vlucas/phpdotenv": "~2.2"
+        "vlucas/phpdotenv": "~2.2",
+        "squizlabs/php_codesniffer": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "phpunit/phpunit": "~6.0",
-        "mockery/mockery": "~0.9"
+        "mockery/mockery": "~0.9",
+        "phpstan/phpstan": "^0.9.2"
     },
     "autoload": {
         "psr-4": {
