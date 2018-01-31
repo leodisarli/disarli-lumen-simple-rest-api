@@ -129,3 +129,9 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE
 * Rate limit
 * Error treatment
 * HTTP status codes
+
+## Code Styling Tools
+
+* reset && ./vendor/bin/phpcs
+* reset && ./vendor/bin/phpcbf
+* reset && ./vendor/bin/phpstan analyse -l 4 -c phpstan.neon app resources

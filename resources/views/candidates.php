@@ -15,13 +15,17 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <a class="navbar-brand" href="<?php echo url('/');?>">Eduzz</a>
-                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo url('/');?>">Candidates <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo url('/');?>"
+                                >Candidates <span class="sr-only">(current)</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Jobs</a>
@@ -64,7 +68,8 @@
                 </main>
             </div>
         </div>
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+            aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -90,7 +95,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,7 +117,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="editAge">Age</label>
-                                <input type="number" class="form-control" id="editAge" placeholder="Age" min="1" max="100">
+                                <input type="number" class="form-control" id="editAge"
+                                    placeholder="Age" min="1" max="100">
                             </div>
                         </div>
                     </div>
@@ -122,11 +129,14 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+            aria-labelledby="delModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addModalLabel">Delete candidate</h5>
+                        <h5 class="modal-title" id="addModalLabel">
+                            Delete candidate
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -136,8 +146,12 @@
                         Confirm the removal of candidate
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger delButton">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-danger delButton">
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -165,11 +179,13 @@
                                 '<td>'+value.age+'</td>'+
                                 '<td>'+value.updated_at+'</td>'+
                                 '<td>'+
-                                    '<button type="button" class="btn btn-primary editModal" data-toggle="modal" data-target="#editModal" data-id="'+value.id+'">'+
+                                    '<button type="button" class="btn btn-primary editModal"'
+                                        'data-toggle="modal" data-target="#editModal" data-id="'+value.id+'">'+
                                         '<i class="fa fa-pencil"></i>'+
                                     '</button>'+
                                     '&nbsp;'+
-                                    '<button type="button" class="btn btn-primary delModal" data-toggle="modal" data-target="#delModal" data-id="'+value.id+'">'+
+                                    '<button type="button" class="btn btn-primary delModal"'+
+                                        ' data-toggle="modal" data-target="#delModal" data-id="'+value.id+'">'+
                                         '<i class="fa fa-trash"></i>'+
                                     '</button>'+
                                 '</td>'+
