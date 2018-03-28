@@ -2,7 +2,7 @@
  
 namespace App\Http\Controllers;
  
-use App\Candidates;
+//use App\Candidates;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -25,7 +25,11 @@ class CandidatesController extends Controller
     public function update(Request $request, $id)
     {
     	$candidate  = Candidates::find($id);
-    	$candidate->name = $request->input('name');
+        $candidate->name = $request->input('name');
+        if (empty($candidate)) {
+            $teste = 1;
+        }
+        echo $teste;
     	$candidate->age = $request->input('age');
     	$candidate->save();
     	return response()->json($candidate);
