@@ -1,0 +1,5 @@
+parameters:
+    ignoreErrors:
+        - '#Call to an undefined static method App\\Candidates::.*#' # Until @method annoations are supported, just ignore
+        - '#Call to an undefined static method App\\User::.*#' # Until @method annoations are supported, just ignore
+        - '#Undefined variable: .*.app#' # Until @var app are internal from lumem
