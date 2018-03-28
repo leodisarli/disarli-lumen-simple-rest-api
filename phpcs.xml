@@ -104,8 +104,8 @@
 	<rule ref="Zend.Files.ClosingTag" />
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property name="lineLimit" value="120" />
-			<property name="absoluteLineLimit" value="130" />
+			<property name="lineLimit" value="230" />
+			<property name="absoluteLineLimit" value="240" />
 		</properties>
 	</rule>
     <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">

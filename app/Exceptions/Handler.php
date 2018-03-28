@@ -22,7 +22,7 @@ class Handler extends ExceptionHandler
         ModelNotFoundException::class,
         ValidationException::class,
     ];
-
+    // @codingStandardsIgnoreStart
     /**
      * Report or log an exception.
      *
@@ -35,7 +35,9 @@ class Handler extends ExceptionHandler
     {
         parent::report($e);
     }
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
     /**
      * Render an exception into an HTTP response.
      *
@@ -47,4 +49,5 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $e);
     }
+    // @codingStandardsIgnoreEnd
 }
