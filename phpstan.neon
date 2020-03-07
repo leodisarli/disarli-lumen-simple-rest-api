@@ -1,0 +1,6 @@
+parameters:
+    ignoreErrors:
+        - '#Call to an undefined static method App\\Candidates::create().#'
+        - '#Call to an undefined static method App\\Candidates::find().#'
+        - '#Call to an undefined static method App\\User::where().#'
+        - '#Undefined variable: \$app#'
